@@ -4,5 +4,5 @@
     <solid android:color="#F6F6F6" /> <!-- Màu nền của nút -->
     <corners android:radius="20dp" /> <!-- Bán kính viền cong -->
     <stroke
-        android:width="0.5dp" />
+        android:width="1dp" />
 </shape>

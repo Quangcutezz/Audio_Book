@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Audio Book</string>
+    <string name="button">button</string>
+    <string name="or">--------- or ---------</string>
+    <string name="login">Login</string>
+    <string name="sign_up">Sign up</string>
+</resources>

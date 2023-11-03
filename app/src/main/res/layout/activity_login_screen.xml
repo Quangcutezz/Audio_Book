@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Login_screen">
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="325dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="41dp"
+        android:layout_marginTop="26dp"
+        android:layout_marginEnd="41dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/button_border"
+        android:text="Button"
+        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintVertical_bias="0.0"
+        tools:ignore="HardcodedText,VisualLintButtonSize" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="141dp"
+        android:layout_marginTop="218dp"
+        android:layout_marginEnd="142dp"
+        android:layout_marginBottom="18dp"
+        android:contentDescription="Logo"
+
+        app:shapeAppearanceOverlay="@style/circular"
+        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/bmo_1"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="296dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="90dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginEnd="90dp"
+        android:layout_marginBottom="192dp"
+        android:gravity="center"
+        android:text="Welcome to Audio Book"
+        android:textAlignment="center"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        android:textColor="#00D4C2"
+        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.507"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        tools:ignore="HardcodedText,SpUsage,TextSizeCheck" />
+</androidx.constraintlayout.widget.ConstraintLayout>

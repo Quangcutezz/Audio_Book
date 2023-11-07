@@ -40,5 +40,15 @@ class Home_page : AppCompatActivity() {
         recyclerView3.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         recyclerView3.adapter = adapter3
 
+        val recyclerView4 = findViewById<RecyclerView>(R.id.recyclerView4)
+        val adapter4 = FeaturedAdapter2(featuredlist2)
+        recyclerView4.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        recyclerView4.adapter = adapter4
+
+        val recyclerView5 = findViewById<RecyclerView>(R.id.recyclerView5)
+        val adapter5 = FeaturedAdapter2(featuredlist2)
+        recyclerView5.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        recyclerView5.adapter = adapter5
+
     }
 }

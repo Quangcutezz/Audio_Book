@@ -1,0 +1,4 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="#EEEEEE" /> <!-- Màu nền của SearchView -->
+    <corners android:radius="20dp" /> <!-- Điều chỉnh bán kính để bo tròn góc -->
+</shape>

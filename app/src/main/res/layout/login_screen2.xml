@@ -66,8 +66,10 @@
         android:background="@drawable/custom_input"
         android:ems="10"
         android:hint="Username"
+        android:text="quangcutezz@gmail.com"
         android:importantForAutofill="no"
         android:inputType="textEmailAddress"
+        android:textColor="@color/black"
         android:paddingStart="15dp"
         android:paddingEnd="15dp"
         android:textColorHint="#B2B2B2"
@@ -81,9 +83,11 @@
         android:id="@+id/Password"
         android:layout_width="336dp"
         android:layout_height="49dp"
+        android:text="quangbmt5h"
         android:layout_marginStart="100dp"
         android:layout_marginEnd="101dp"
         android:layout_marginBottom="260dp"
+        android:textColor="@color/black"
         android:background="@drawable/custom_input"
         android:ems="10"
         android:hint="Password"
@@ -99,7 +103,7 @@
         tools:ignore="HardcodedText" />
 
     <Button
-        android:id="@+id/signup"
+        android:id="@+id/signin"
         android:layout_width="325dp"
         android:layout_height="48dp"
         android:layout_marginStart="44dp"
@@ -118,7 +122,7 @@
         tools:ignore="VisualLintButtonSize" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/signup"
         android:layout_width="325dp"
         android:layout_height="48dp"
         android:layout_marginStart="45dp"
@@ -132,7 +136,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signup"
+        app:layout_constraintTop_toBottomOf="@+id/signin"
         app:layout_constraintVertical_bias="1.0" />
 
     <TextView
@@ -149,7 +153,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button2"
+        app:layout_constraintTop_toBottomOf="@+id/signup"
         app:layout_constraintVertical_bias="0.416" />
 
     <LinearLayout

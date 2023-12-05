@@ -73,7 +73,7 @@ class Login_screen_2 : AppCompatActivity() {
     }
 
     private fun navigateToHomeActivity() {
-        val intent = Intent(this, Home_page::class.java)
+        val intent = Intent(this, MainScreen::class.java)
         startActivity(intent)
         finish() // Đóng LoginActivity sau khi chuyển sang HomeActivity
     }

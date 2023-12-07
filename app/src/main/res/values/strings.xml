@@ -17,6 +17,11 @@
     <string name="ForYou">Tập dành cho bạn</string>
     <string name="Top">Tuyển tập hàng đầu</string>
     <string name="Author">Tác giả được yêu thích nhất</string>
+    <string name="AllType">#Tất cả thể loại</string>
+    <string name="HotType">#Các thể loại thịnh hành</string>
+    <string name="SearchHint">Nhập nội dung bạn cần tìm</string>
+    <string name="Love">Tình Yêu</string>
+    <string name="ManyAuthor">Quangcutezz,LongBaybi,VuaDaDinh,PhucNgoz</string>
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -1,0 +1,40 @@
+<!-- item_genre.xml -->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="280dp"
+    android:orientation="vertical"
+    android:layout_marginStart="10dp">
+
+
+    <ImageView
+
+        android:id="@+id/imageViewGenreIcon"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:layout_gravity="left"
+        android:src="@drawable/rectangle_17_2" />
+
+    <TextView
+        android:id="@+id/textViewTypeName"
+        android:layout_width="113dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="@string/Love"
+        android:textSize="10dp"
+        android:maxLines="1"
+        android:ellipsize="end"
+        tools:ignore="TextSizeCheck" />
+
+    <TextView
+        android:id="@+id/textViewGenreAuthor"
+        android:layout_width="113dp"
+        android:layout_height="wrap_content"
+        android:text="@string/ManyAuthor"
+        android:textSize="10dp"
+        android:maxLines="1"
+        android:ellipsize="end"
+        tools:ignore="TextSizeCheck" />
+
+</LinearLayout>

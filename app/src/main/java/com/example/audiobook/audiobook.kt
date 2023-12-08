@@ -1,23 +1,16 @@
-package com.example.audiobook
+import java.io.Serializable
 
-class audiobook {
-    var id: String = ""
-    var name: String = ""
-    var image: String = ""
-    var type: String = ""
-    var author: String = ""
+class audiobook(
+    var id: String,
+    var name: String,
+    var image: String,
+    var type: String,
+    var author: String
+) : Serializable {
 
-    constructor(name: String, image: String, type: String, author: String) {
-        this.name = name
-        this.image = image
-        this.type = type
-        this.author = author
-    }
-    constructor(){
+    constructor(name: String, image: String, type: String, author: String) : this("", name, image, type, author)
 
-    }
-
-
+    constructor() : this("", "", "", "", "")
 
     fun printInfo() {
         println("ID: $id")

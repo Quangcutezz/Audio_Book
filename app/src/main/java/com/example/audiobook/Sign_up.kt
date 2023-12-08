@@ -80,7 +80,7 @@ class Sign_up : AppCompatActivity() {
     }
 
     private fun navigateToHomeActivity() {
-        val intent = Intent(this, Home_page::class.java)
+        val intent = Intent(this, MainScreen::class.java)
         startActivity(intent)
         finish() // Đóng SignUpActivity sau khi chuyển sang HomeActivity
     }

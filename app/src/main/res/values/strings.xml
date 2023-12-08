@@ -22,6 +22,14 @@
     <string name="SearchHint">Nhập nội dung bạn cần tìm</string>
     <string name="Love">Tình Yêu</string>
     <string name="ManyAuthor">Quangcutezz,LongBaybi,VuaDaDinh,PhucNgoz</string>
-<!-- TODO: Remove or change this placeholder text -->
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="Detail_Fragment">Detail Page</string>
+    <string name="Detail1">Định mệnh</string>
+    <string name="Follow">Theo dõi</string>
+    <string name="Phobien">Phổ Biến</string>
+    <string name="Cothethich">Có thể bạn cũng thích</string>
+    <string name="Cacbanphathanhmoi">Các bản phát hành mới</string>
+    <string name="title_Detail">Detail page</string>
+    <string name="IntroDetail1">Tình chỉ đẹp khi tình còn dang dở, hoa chỉ đẹp khi hoa nở chóng tàn</string>
 </resources>

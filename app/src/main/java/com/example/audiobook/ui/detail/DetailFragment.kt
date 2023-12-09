@@ -1,5 +1,6 @@
 package com.example.audiobook.ui.detail
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,13 +15,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.audiobook.DetailAdapter
 import com.example.audiobook.databinding.FragmentDetailBinding
 import com.example.audiobook.databinding.FragmentHomeBinding
+import com.example.audiobook.play_book
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
-class DetailFragment : Fragment() {
+class DetailFragment : Fragment(), DetailAdapter.OnItemClickListener {
 
     private lateinit var binding: FragmentDetailBinding
     private lateinit var detailListView1: RecyclerView
@@ -84,7 +86,7 @@ class DetailFragment : Fragment() {
         }
 
         recyclerView.adapter = adapter
-
+        adapter.setOnItemClickListener(this) // Đặt người nghe nhấp vào
 
         val databaseReference = FirebaseDatabase.getInstance().reference.child(databasePath)
         databaseReference.addValueEventListener(object : ValueEventListener {
@@ -106,6 +108,16 @@ class DetailFragment : Fragment() {
                 // Handle error
             }
         })
-    }
 
+    }
+    // Triển khai phương thức onItemClick
+    override fun onItemClick(audiobook: audiobook) {
+        // Khởi chạy PlayerActivity với audiobook được chọn
+        val intent = Intent(requireContext(), play_book::class.java)
+        //intent.putExtra("AUDIOBOOK", audiobook)
+        intent.putExtra("IMAGE", audiobook.image)
+        intent.putExtra("NAME", audiobook.name)
+        intent.putExtra("AUTHOR", audiobook.author)
+        startActivity(intent)
+    }
 }

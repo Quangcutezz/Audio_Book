@@ -21,8 +21,9 @@
     <string name="HotType">#Các thể loại thịnh hành</string>
     <string name="SearchHint">Nhập nội dung bạn cần tìm</string>
     <string name="Love">Tình Yêu</string>
+    <string name="authorDetail">Author</string>
     <string name="ManyAuthor">Quangcutezz,LongBaybi,VuaDaDinh,PhucNgoz</string>
-
+    <string name="book1">Cuộc sống muôn màu</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="Detail_Fragment">Detail Page</string>
     <string name="Detail1">Định mệnh</string>

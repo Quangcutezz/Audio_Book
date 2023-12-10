@@ -18,7 +18,6 @@
         android:orientation="vertical"
         android:layout_width="230dp"
         android:layout_height="match_parent">
-
         <TextView
             android:id="@+id/nameDetail"
             android:layout_width="wrap_content"

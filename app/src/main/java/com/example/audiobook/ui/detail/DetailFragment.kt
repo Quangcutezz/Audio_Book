@@ -2,19 +2,19 @@ package com.example.audiobook.ui.detail
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
-import audiobook
 import com.example.audiobook.R
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import audiobook
 import com.example.audiobook.DetailAdapter
 import com.example.audiobook.databinding.FragmentDetailBinding
-import com.example.audiobook.databinding.FragmentHomeBinding
 import com.example.audiobook.play_book
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.database.DataSnapshot
@@ -67,7 +67,7 @@ class DetailFragment : Fragment(), DetailAdapter.OnItemClickListener {
         detailListView2 =binding.detailList2
         detailListView3 =binding.detailList3
 
-        setupRecyclerView(detailListView1, "Audio")
+        setupRecyclerView(detailListView1, "DetailAudio")
         setupRecyclerView(detailListView2, "New")
         setupRecyclerView(detailListView3, "ForYou")
         return root
@@ -77,7 +77,7 @@ class DetailFragment : Fragment(), DetailAdapter.OnItemClickListener {
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
 
         val adapter = when (databasePath) {
-            "Audio" -> DetailAdapter(emptyList())
+            "DetailAudio" -> DetailAdapter(emptyList())
             "New" -> DetailAdapter(emptyList())
             "ForYou" -> DetailAdapter(emptyList())
 //            "Top" -> GenreAdapter(emptyList())
@@ -97,7 +97,9 @@ class DetailFragment : Fragment(), DetailAdapter.OnItemClickListener {
                     val name = dataSnapshot.child("name").getValue(String::class.java) ?: ""
                     val author = dataSnapshot.child("author").getValue(String::class.java) ?: ""
                     val type = dataSnapshot.child("type").getValue(String::class.java) ?: ""
-                    val genre = audiobook(name, image, type, author)
+                    val file = dataSnapshot.child("file").getValue(String::class.java) ?: ""
+                    Log.d("DetailFragment", "File value: $file")
+                    val genre = audiobook(name, image, type, author,file)
                     genres.add(genre)
                 }
                 adapter.setData(genres)
@@ -118,6 +120,7 @@ class DetailFragment : Fragment(), DetailAdapter.OnItemClickListener {
         intent.putExtra("IMAGE", audiobook.image)
         intent.putExtra("NAME", audiobook.name)
         intent.putExtra("AUTHOR", audiobook.author)
+        intent.putExtra("FILE",audiobook.file)
         startActivity(intent)
     }
 }

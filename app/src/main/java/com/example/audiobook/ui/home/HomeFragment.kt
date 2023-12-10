@@ -102,7 +102,8 @@ class HomeFragment : Fragment() {
                     val name = dataSnapshot.child("name").getValue(String::class.java) ?: ""
                     val author = dataSnapshot.child("author").getValue(String::class.java) ?: ""
                     val type = dataSnapshot.child("type").getValue(String::class.java) ?: ""
-                    val genre = audiobook(name, image, type, author)
+                    val file = dataSnapshot.child("file").getValue(String::class.java) ?: ""
+                    val genre = audiobook(name, image, type, author,file)
                     genres.add(genre)
                 }
                 adapter.setData(genres)

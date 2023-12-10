@@ -36,7 +36,6 @@ class DetailAdapter(private var genres: List<audiobook>) : RecyclerView.Adapter<
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val genre = genres[position]
-
         Picasso.get().load(genre.image).into(holder.imageViewGenreIcon)
         // Set icon và tên type
         holder.textViewTypeName.text = genre.name

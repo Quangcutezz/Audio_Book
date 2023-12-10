@@ -5,12 +5,13 @@ class audiobook(
     var name: String,
     var image: String,
     var type: String,
-    var author: String
+    var author: String,
+    var file:String
 ) : Serializable {
 
-    constructor(name: String, image: String, type: String, author: String) : this("", name, image, type, author)
+    constructor(name: String, image: String, type: String, author: String,file: String) : this("", name, image, type, author,file)
 
-    constructor() : this("", "", "", "", "")
+    constructor() : this("", "", "", "", "","")
 
     fun printInfo() {
         println("ID: $id")

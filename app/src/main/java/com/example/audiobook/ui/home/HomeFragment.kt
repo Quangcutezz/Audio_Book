@@ -1,5 +1,6 @@
 package com.example.audiobook.ui.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -19,6 +20,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import androidx.navigation.fragment.findNavController
 import com.example.audiobook.R
+import com.example.audiobook.play_book
 
 
 class HomeFragment : Fragment() {
@@ -36,20 +38,6 @@ class HomeFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var recyclerView2: RecyclerView
     private lateinit var recyclerView3: RecyclerView
-    private lateinit var recyclerView4: RecyclerView
-    private lateinit var recyclerView5: RecyclerView
-
-    private lateinit var adapterGenre: GenreAdapter
-    private lateinit var adapterGenre2: GenreAdapter
-    private lateinit var adapterGenre3: GenreAdapter
-    private lateinit var adapterGenre4: GenreAdapter
-    private lateinit var adapterGenre5: GenreAdapter
-
-    private lateinit var databaseReference: DatabaseReference
-    private lateinit var databaseReference2: DatabaseReference
-    private lateinit var databaseReference3: DatabaseReference
-    private lateinit var databaseReference4: DatabaseReference
-    private lateinit var databaseReference5: DatabaseReference
     fun setOnItemClickListener(listener: OnItemClickListener) {
         this.onItemClickListener = listener
     }
@@ -63,17 +51,11 @@ class HomeFragment : Fragment() {
 
         recyclerView = binding.rvBest
         recyclerView2 = binding.rvRecent
-        recyclerView3 = binding.rvForYou
-        recyclerView4 = binding.rvTop
-        recyclerView5 = binding.rvAuthor
 
 
         //adapterGenre = GenreAdapter(emptyList())
         setupRecyclerView(recyclerView, "Audio")
         setupRecyclerView(recyclerView2, "New")
-        setupRecyclerView(recyclerView3, "ForYou")
-        setupRecyclerView(recyclerView4, "Top")
-        setupRecyclerView(recyclerView5, "Author")
 
         return root
     }
@@ -103,7 +85,8 @@ class HomeFragment : Fragment() {
                     val author = dataSnapshot.child("author").getValue(String::class.java) ?: ""
                     val type = dataSnapshot.child("type").getValue(String::class.java) ?: ""
                     val file = dataSnapshot.child("file").getValue(String::class.java) ?: ""
-                    val genre = audiobook(name, image, type, author,file)
+                    val detailPageType = dataSnapshot.child("detailPageType").getValue(String::class.java) ?: ""
+                    val genre = audiobook(name, image, type, author,file,detailPageType)
                     genres.add(genre)
                 }
                 adapter.setData(genres)
@@ -116,6 +99,16 @@ class HomeFragment : Fragment() {
         })
         adapter.setOnItemClickListener(object : GenreAdapter.OnItemClickListener {
             override fun onItemClick(audiobook: audiobook) {
+
+                // Lấy ID hoặc loại dữ liệu liên quan từ audiobook
+                val detailPageType = audiobook.detailPageType
+
+                val bundle = Bundle()
+                bundle.putSerializable("ARG_AUDIOBOOK", audiobook)
+                bundle.putString("ARG_DETAIL_PAGE_TYPE", detailPageType)
+
+                val detailFragment2 = DetailFragment()
+                detailFragment2.arguments = bundle
                 // code để chuyển đến DetailFragment
                 val fragmentManager = requireActivity().supportFragmentManager
                 val transaction = fragmentManager.beginTransaction()

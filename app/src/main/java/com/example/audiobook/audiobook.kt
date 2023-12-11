@@ -6,10 +6,11 @@ class audiobook(
     var image: String,
     var type: String,
     var author: String,
-    var file:String
+    var file:String,
+    var detailPageType:String
 ) : Serializable {
 
-    constructor(name: String, image: String, type: String, author: String,file: String) : this("", name, image, type, author,file)
+    constructor(name: String, image: String, type: String, author: String,file: String,detailPageType: String) : this("", name, image, type, author,file,detailPageType)
 
     constructor() : this("", "", "", "", "","")
 

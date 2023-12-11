@@ -2,18 +2,17 @@ package com.example.audiobook.ui.detail
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import androidx.fragment.app.Fragment
-import com.example.audiobook.R
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import audiobook
 import com.example.audiobook.DetailAdapter
+import com.example.audiobook.R
 import com.example.audiobook.databinding.FragmentDetailBinding
 import com.example.audiobook.play_book
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -21,13 +20,12 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.squareup.picasso.Picasso
 
 class DetailFragment : Fragment(), DetailAdapter.OnItemClickListener {
 
     private lateinit var binding: FragmentDetailBinding
     private lateinit var detailListView1: RecyclerView
-    private lateinit var detailListView2: RecyclerView
-    private lateinit var detailListView3: RecyclerView
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (requireActivity() as AppCompatActivity).findViewById<BottomNavigationView>(R.id.nav_view)
@@ -51,42 +49,59 @@ class DetailFragment : Fragment(), DetailAdapter.OnItemClickListener {
             return fragment
         }
     }
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         binding = FragmentDetailBinding.inflate(inflater, container, false)
         val root: View = binding.root
-        detailListView1 =binding.detailList1
-        detailListView2 =binding.detailList2
-        detailListView3 =binding.detailList3
+        detailListView1 = binding.detailList1
 
-        setupRecyclerView(detailListView1, "DetailAudio")
-        setupRecyclerView(detailListView2, "New")
-        setupRecyclerView(detailListView3, "ForYou")
+        val arguments = arguments
+
+        val audiobook = arguments?.getSerializable(ARG_AUDIOBOOK) as audiobook?
+        val detailPageType = audiobook?.detailPageType
+        if (detailPageType != null) {
+
+            // Sử dụng giá trị detailPageType để xác định dữ liệu cần hiển thị
+            if ("type1" == detailPageType) {
+                // Hiển thị dữ liệu từ database DetailPage1
+                setupRecyclerView(detailListView1, "DetailAudio")
+            } else if ("type2" == detailPageType) {
+                // Hiển thị dữ liệu từ database DetailPage2
+                setupRecyclerView(detailListView1, "DetailAudio2")
+            }
+            // ...
+        }
+        val image = audiobook?.image
+        val intro = audiobook?.name
+        // Set the background of bg_topDetail using Picasso
+        //Picasso.get().load(image).into(binding.bgTopDetail)
+        // Inside your Fragment or Activity
+        val introText = binding.introText
+        introText.setText(intro)
+        val imageViewBackground = binding.imageViewBackground
+
+        // Load the image into the ImageView using Picasso
+        Picasso.get().load(image).into(imageViewBackground)
+
+        //setupRecyclerView(detailListView1, "DetailAudio")
+
         return root
     }
+
     private fun setupRecyclerView(recyclerView: RecyclerView, databasePath: String) {
         recyclerView.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
 
         val adapter = when (databasePath) {
             "DetailAudio" -> DetailAdapter(emptyList())
-            "New" -> DetailAdapter(emptyList())
-            "ForYou" -> DetailAdapter(emptyList())
-//            "Top" -> GenreAdapter(emptyList())
-//            "Author" -> GenreAdapter(emptyList())
             else -> DetailAdapter(emptyList())
         }
 
         recyclerView.adapter = adapter
-        adapter.setOnItemClickListener(this) // Đặt người nghe nhấp vào
+        adapter.setOnItemClickListener(this)
 
         val databaseReference = FirebaseDatabase.getInstance().reference.child(databasePath)
         databaseReference.addValueEventListener(object : ValueEventListener {
@@ -98,29 +113,25 @@ class DetailFragment : Fragment(), DetailAdapter.OnItemClickListener {
                     val author = dataSnapshot.child("author").getValue(String::class.java) ?: ""
                     val type = dataSnapshot.child("type").getValue(String::class.java) ?: ""
                     val file = dataSnapshot.child("file").getValue(String::class.java) ?: ""
-                    Log.d("DetailFragment", "File value: $file")
-                    val genre = audiobook(name, image, type, author,file)
+                    val detailPageType = dataSnapshot.child("detailPageType").getValue(String::class.java) ?: ""
+                    val genre = audiobook(name, image, type, author, file,detailPageType)
                     genres.add(genre)
                 }
                 adapter.setData(genres)
-
             }
 
             override fun onCancelled(error: DatabaseError) {
                 // Handle error
             }
         })
-
     }
-    // Triển khai phương thức onItemClick
+
     override fun onItemClick(audiobook: audiobook) {
-        // Khởi chạy PlayerActivity với audiobook được chọn
         val intent = Intent(requireContext(), play_book::class.java)
-        //intent.putExtra("AUDIOBOOK", audiobook)
         intent.putExtra("IMAGE", audiobook.image)
         intent.putExtra("NAME", audiobook.name)
         intent.putExtra("AUTHOR", audiobook.author)
-        intent.putExtra("FILE",audiobook.file)
+        intent.putExtra("FILE", audiobook.file)
         startActivity(intent)
     }
 }

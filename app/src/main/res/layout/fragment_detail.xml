@@ -23,22 +23,19 @@
                 android:orientation="vertical"
                 android:background="@color/white"
                 android:layout_height="match_parent">
-                <LinearLayout
+                <RelativeLayout
+                    android:id="@+id/bg_topDetail"
                     android:layout_width="match_parent"
                     android:layout_height="250dp"
                     android:gravity="center"
-                    android:background="@drawable/rectangle_17">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/Detail1"
-                        android:textColor="@color/white"
-                        android:layout_marginTop="100dp"
-                        android:textStyle="bold"
-                        android:textSize="40dp"
-                        android:layout_gravity="center"
-                        />
-                </LinearLayout>
+                    >
+                    <ImageView
+                        android:id="@+id/imageViewBackground"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/rectangle_15_2" />
+                </RelativeLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -58,11 +55,16 @@
                                     android:layout_height="wrap_content">
 
                                     <TextView
-                                        android:text="@string/IntroDetail1"
-                                        android:maxLines="2"
-                                        android:ellipsize="end"
+                                        android:id="@+id/introText"
                                         android:layout_width="250dp"
-                                        android:layout_height="wrap_content"/>
+                                        android:layout_height="wrap_content"
+                                        android:ellipsize="end"
+                                        android:maxLines="2"
+                                        android:text="@string/IntroDetail1"
+                                        android:textColor="@color/teal_200"
+                                        android:textSize="15dp"
+                                        android:textStyle="bold"
+                                        tools:ignore="TextSizeCheck" />
 
                                     <Button
                                         android:layout_marginTop="5dp"
@@ -95,38 +97,6 @@
                                 />
                             <androidx.recyclerview.widget.RecyclerView
                                 android:id="@+id/detailList1"
-                                android:layout_marginTop="10dp"
-                                android:orientation="vertical"
-                                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"/>
-                            <TextView
-                                android:layout_marginTop="20dp"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textColor="@color/teal_200"
-                                android:text="@string/Cothethich"
-                                android:textStyle="bold"
-                                android:textSize="20dp"
-                                />
-                            <androidx.recyclerview.widget.RecyclerView
-                                android:id="@+id/detailList2"
-                                android:layout_marginTop="10dp"
-                                android:orientation="vertical"
-                                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"/>
-                            <TextView
-                                android:layout_marginTop="20dp"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/Cacbanphathanhmoi"
-                                android:textColor="@color/teal_200"
-                                android:textSize="20dp"
-                                android:textStyle="bold"
-                                />
-                            <androidx.recyclerview.widget.RecyclerView
-                                android:id="@+id/detailList3"
                                 android:layout_marginTop="10dp"
                                 android:orientation="vertical"
                                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"

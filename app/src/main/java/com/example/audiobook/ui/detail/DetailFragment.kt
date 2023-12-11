@@ -72,6 +72,10 @@ class DetailFragment : Fragment(), DetailAdapter.OnItemClickListener {
                 // Hiển thị dữ liệu từ database DetailPage2
                 setupRecyclerView(detailListView1, "DetailAudio2")
             }
+            else if ("type3" == detailPageType) {
+                // Hiển thị dữ liệu từ database DetailPage2
+                setupRecyclerView(detailListView1, "DetailAudio3")
+            }
             // ...
         }
         val image = audiobook?.image

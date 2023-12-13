@@ -10,6 +10,9 @@
     <string name="title_music">Music</string>
     <string name="title_profile">Profile</string>
     <string name="all">Tất cả</string>
+    <string name="finding">Tìm kiếm AudioBook, thể loại,</string>
+    <string name="finding2"> người đọc sách, và nhiều nội dung khác</string>
+    <string name="fingding3">Nghe cuốn sách bạn thích</string>
     <string name="Popcasts">Popcasts</string>
     <string name="AudioBook">AudioBook</string>
     <string name="BestChoice">Lựa chọn của BMO</string>
@@ -22,6 +25,7 @@
     <string name="SearchHint">Nhập nội dung bạn cần tìm</string>
     <string name="Love">Tình Yêu</string>
     <string name="authorDetail">Author</string>
+    <string name="searching">Bạn muốn nghe gì?</string>
     <string name="ManyAuthor">Quangcutezz,LongBaybi,VuaDaDinh,PhucNgoz</string>
     <string name="book1">Cuộc sống muôn màu</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>

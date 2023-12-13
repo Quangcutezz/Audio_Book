@@ -33,9 +33,10 @@ class DetailFragment : Fragment(), DetailAdapter.OnItemClickListener {
         val backButton = view.findViewById<Button>(R.id.backButton)
         backButton.setOnClickListener {
             // Thực hiện logic khi ấn nút back
+
+            requireActivity().supportFragmentManager.popBackStack()
             (requireActivity() as AppCompatActivity).findViewById<BottomNavigationView>(R.id.nav_view)
                 .visibility = View.VISIBLE
-            requireActivity().supportFragmentManager.popBackStack()
         }
     }
     companion object {
@@ -67,7 +68,7 @@ class DetailFragment : Fragment(), DetailAdapter.OnItemClickListener {
             // Sử dụng giá trị detailPageType để xác định dữ liệu cần hiển thị
             if ("type1" == detailPageType) {
                 // Hiển thị dữ liệu từ database DetailPage1
-                setupRecyclerView(detailListView1, "DetailAudio")
+                setupRecyclerView(detailListView1, "allAudio")
             } else if ("type2" == detailPageType) {
                 // Hiển thị dữ liệu từ database DetailPage2
                 setupRecyclerView(detailListView1, "DetailAudio2")

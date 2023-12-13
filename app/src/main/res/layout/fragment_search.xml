@@ -7,27 +7,26 @@
     android:background="@color/white"
     tools:context=".ui.search.SearchFragment">
 
-    <android.widget.SearchView
-        android:id="@+id/searchView"
-        style="@style/MySearchViewStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+    <Button
+        android:id="@+id/searchButton"
+        android:layout_width="350dp"
+        android:layout_height="50dp"
         android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
         android:layout_marginTop="10dp"
-        android:background="@drawable/custom_search_view"
-        android:queryHint="@string/SearchHint"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/searchimage2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="65dp"
         app:layout_constraintStart_toStartOf="parent"
         android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@id/searchView" >
+        app:layout_constraintTop_toBottomOf="@id/searchButton" >
 
         <ScrollView
             android:layout_width="match_parent"
@@ -66,13 +65,6 @@
                     android:textSize="20dp"
                     android:layout_marginLeft="30dp"
                     android:layout_marginTop="20dp"
-                    />
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerViewGenres"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
                     />
             </LinearLayout>
         </ScrollView>

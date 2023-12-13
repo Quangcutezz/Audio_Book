@@ -10,10 +10,20 @@ import audiobook
 import com.squareup.picasso.Picasso
 
 class SearchAdapter(private var genres: List<audiobook>) : RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
+    private var onItemClickListener: OnItemClickListener? = null
+    interface OnItemClickListener {
+        fun onItemClick(audiobook: audiobook)
+    }
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val imageViewSearch : ImageView = itemView.findViewById(R.id.imageViewSearch)
         val textViewTypeName : TextView = itemView.findViewById(R.id.nameSearch)
         val textViewGenreAuthor: TextView = itemView.findViewById(R.id.nameSearchAuthor)
+        init {
+            // Thêm sự kiện onClick cho itemView
+            itemView.setOnClickListener {
+                onItemClickListener?.onItemClick(genres[adapterPosition])
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -27,7 +37,9 @@ class SearchAdapter(private var genres: List<audiobook>) : RecyclerView.Adapter<
         holder.textViewTypeName.text = genre.name
         holder.textViewGenreAuthor.text = genre.author
     }
-
+    fun setOnItemClickListener(listener: OnItemClickListener) {
+        this.onItemClickListener = listener
+    }
     override fun getItemCount(): Int {
         return genres.size
     }

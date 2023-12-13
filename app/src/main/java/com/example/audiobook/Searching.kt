@@ -1,5 +1,6 @@
 package com.example.audiobook
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -17,7 +18,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
-class Searching : AppCompatActivity() {
+class Searching : AppCompatActivity(), SearchAdapter.OnItemClickListener {
     private lateinit var buttonBack: Button
     private lateinit var searchRecyclerView: RecyclerView
     private lateinit var searchView: SearchView
@@ -57,48 +58,15 @@ class Searching : AppCompatActivity() {
             }
         })
     }
-//private fun setupRecyclerView(recyclerView: RecyclerView, databasePath: String) {
-//    recyclerView.layoutManager =
-//        LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-//
-//    val adapter = when (databasePath) {
-//        "allAudio" -> SearchAdapter(emptyList())
-//        else -> SearchAdapter(emptyList())
-//    }
-//
-//    recyclerView.adapter = adapter
-////    adapter.setOnItemClickListener(this)
-//
-//    val databaseReference = FirebaseDatabase.getInstance().reference.child(databasePath)
-//    databaseReference.addValueEventListener(object : ValueEventListener {
-//        override fun onDataChange(snapshot: DataSnapshot) {
-//            val genres = mutableListOf<audiobook>()
-//            for (dataSnapshot in snapshot.children) {
-//                val image = dataSnapshot.child("image").getValue(String::class.java) ?: ""
-//                val name = dataSnapshot.child("name").getValue(String::class.java) ?: ""
-//                val author = dataSnapshot.child("author").getValue(String::class.java) ?: ""
-//                val type = dataSnapshot.child("type").getValue(String::class.java) ?: ""
-//                val file = dataSnapshot.child("file").getValue(String::class.java) ?: ""
-//                val detailPageType = dataSnapshot.child("detailPageType").getValue(String::class.java) ?: ""
-//                val genre = audiobook(name, image, type, author, file,detailPageType)
-//                genres.add(genre)
-//            }
-//            adapter.setData(genres)
-//        }
-//
-//        override fun onCancelled(error: DatabaseError) {
-//            // Handle error
-//        }
-//    })
-//}
+
     private fun searchInDatabase(recyclerView: RecyclerView,query: String) {
     recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         adapter = SearchAdapter(emptyList())
         recyclerView.adapter = adapter
+        adapter.setOnItemClickListener(this)
         if (query.isNotEmpty()) {
             val databaseReference = FirebaseDatabase.getInstance().reference.child("allAudio")
-//            val queryRef = databaseReference.orderByChild("searchField").startAt(query)
-//                .endAt(query + "\uf8ff")
+
             databaseReference.addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     val genres = mutableListOf<audiobook>()
@@ -135,5 +103,13 @@ class Searching : AppCompatActivity() {
             // Xử lý khi query rỗng
             adapter.setData(emptyList())
         }
+    }
+    override fun onItemClick(audiobook: audiobook) {
+        val intent = Intent(this, play_book::class.java)
+        intent.putExtra("IMAGE", audiobook.image)
+        intent.putExtra("NAME", audiobook.name)
+        intent.putExtra("AUTHOR", audiobook.author)
+        intent.putExtra("FILE", audiobook.file)
+        startActivity(intent)
     }
 }

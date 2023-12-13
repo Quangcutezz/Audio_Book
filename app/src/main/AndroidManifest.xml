@@ -16,6 +16,9 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:targetApi="31">
         <activity
+            android:name=".DetailType"
+            android:exported="false" />
+        <activity
             android:name=".Searching"
             android:exported="false" />
         <activity
@@ -30,7 +33,7 @@
         </activity>
         <activity
             android:name=".play_book"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".user_screen"
             android:exported="true">

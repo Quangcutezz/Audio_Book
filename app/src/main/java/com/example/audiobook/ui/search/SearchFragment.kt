@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import audiobook
+import com.example.audiobook.DetailType
 import com.example.audiobook.GenreAdapter
 import com.example.audiobook.R
 import com.example.audiobook.Searching
@@ -26,6 +27,15 @@ class SearchFragment : Fragment() {
     private var _binding: FragmentSearchBinding? = null
     private lateinit var recyclerView: RecyclerView
     private lateinit var searchButton: Button
+    private lateinit var typeBut1: Button
+    private lateinit var typeBut2: Button
+    private lateinit var typeBut3: Button
+    private lateinit var typeBut4: Button
+    // Khai báo ID cho từng button
+    private val BUTTON_ID_1 = 1
+    private val BUTTON_ID_2 = 2
+    private val BUTTON_ID_3 = 3
+    private val BUTTON_ID_4 = 4
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -35,6 +45,16 @@ class SearchFragment : Fragment() {
     ): View? {
         _binding = FragmentSearchBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
+        typeBut1 = binding.but1
+        typeBut2 = binding.but2
+        typeBut3 = binding.but3
+        typeBut4 = binding.but4
+        onButtonTypeListener(typeBut1,BUTTON_ID_1)
+        onButtonTypeListener(typeBut2,BUTTON_ID_2)
+        onButtonTypeListener(typeBut3,BUTTON_ID_3)
+        onButtonTypeListener(typeBut4,BUTTON_ID_4)
+
 
         searchButton = binding.searchButton
         searchButton.setOnClickListener {
@@ -112,7 +132,14 @@ class SearchFragment : Fragment() {
             }
         })
     }
+    private fun onButtonTypeListener(button: Button,buttonId: Int){
+        button.setOnClickListener{
 
+            val intent = Intent(requireContext(), DetailType::class.java)
+            intent.putExtra("buttonId", buttonId)
+            startActivity(intent)
+        }
+    }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

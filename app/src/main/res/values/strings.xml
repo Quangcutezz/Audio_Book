@@ -8,6 +8,11 @@
     <string name="title_home">Home Page</string>
     <string name="title_search">Search</string>
     <string name="title_music">Music</string>
+    <string name="typeBut1">Tình Yêu</string>
+    <string name="typeBut2">Kinh Doanh</string>
+    <string name="typeBut3">Chiến Tranh</string>
+    <string name="typeBut4">Cuộc Sống</string>
+    <string name="More">Thể loại khác </string>
     <string name="title_profile">Profile</string>
     <string name="all">Tất cả</string>
     <string name="finding">Tìm kiếm AudioBook, thể loại,</string>
@@ -21,7 +26,7 @@
     <string name="Top">Tuyển tập hàng đầu</string>
     <string name="Author">Tác giả được yêu thích nhất</string>
     <string name="AllType">#Tất cả thể loại</string>
-    <string name="HotType">#Các thể loại thịnh hành</string>
+    <string name="HotType">#Các Playlist thịnh hành</string>
     <string name="SearchHint">Nhập nội dung bạn cần tìm</string>
     <string name="Love">Tình Yêu</string>
     <string name="authorDetail">Author</string>

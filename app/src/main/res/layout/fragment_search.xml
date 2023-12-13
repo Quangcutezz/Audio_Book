@@ -26,6 +26,8 @@
         android:layout_marginTop="65dp"
         app:layout_constraintStart_toStartOf="parent"
         android:orientation="vertical"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         app:layout_constraintTop_toBottomOf="@id/searchButton" >
 
         <ScrollView
@@ -66,6 +68,60 @@
                     android:layout_marginLeft="30dp"
                     android:layout_marginTop="20dp"
                     />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_height="wrap_content">
+
+                    <Button
+                        android:id="@+id/but1"
+                        android:layout_width="160dp"
+                        android:layout_height="70dp"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/typeBut1"
+                        android:textColor="@color/white"
+                        android:background="@drawable/custom_type"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="SpeakableTextPresentCheck" />
+                    <Button
+                        android:id="@+id/but2"
+                        android:layout_width="160dp"
+                        android:layout_height="70dp"
+                        android:text="@string/typeBut2"
+                        android:layout_marginTop="10dp"
+                        android:textColor="@color/white"
+                        android:layout_marginStart="20dp"
+                        android:background="@drawable/custom_type"
+                        app:layout_constraintStart_toEndOf="@+id/but1"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="SpeakableTextPresentCheck" />
+                    <Button
+                        android:id="@+id/but3"
+                        android:layout_width="160dp"
+                        android:layout_height="70dp"
+                        android:text="@string/typeBut3"
+                        android:textColor="@color/white"
+                        android:layout_marginTop="20dp"
+                        android:background="@drawable/custom_type"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/but1"
+                        tools:ignore="SpeakableTextPresentCheck" />
+                    <Button
+                        android:id="@+id/but4"
+                        android:layout_width="160dp"
+                        android:layout_height="70dp"
+                        android:text="@string/typeBut4"
+                        android:textColor="@color/white"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginStart="20dp"
+                        android:background="@drawable/custom_type"
+                        app:layout_constraintStart_toEndOf="@+id/but3"
+                        app:layout_constraintTop_toBottomOf="@id/but2"
+                        tools:ignore="SpeakableTextPresentCheck" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
         </ScrollView>
     </LinearLayout>

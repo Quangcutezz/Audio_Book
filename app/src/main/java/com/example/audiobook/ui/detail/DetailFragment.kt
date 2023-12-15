@@ -157,23 +157,35 @@ class DetailFragment : Fragment(), DetailAdapter.OnItemClickListener,DetailAdapt
         ).show()
     }
     override fun onFavoriteItemClick(item: audiobook) {
-        val favoriteItem = audiobook(
-            name = item.name,
-            image = item.image,
-            type = item.type,
-            author = item.author,
-            file = item.file,
-            detailPageType = item.detailPageType
-        )
-        Log.d("FavoriteItem", "Name: ${favoriteItem.name}, Image: ${favoriteItem.image}, Type: ${favoriteItem.type}, Author: ${favoriteItem.author}, File: ${favoriteItem.file}, DetailPageType: ${favoriteItem.detailPageType}")
+        if (isItemInFavorites(item)) {
+            Toast.makeText(
+                requireContext(),
+                "Bài này đã được thêm vào danh sách yêu thích rồi",
+                Toast.LENGTH_SHORT
+            ).show()
+        } else {
+            val favoriteItem = audiobook(
+                name = item.name,
+                image = item.image,
+                type = item.type,
+                author = item.author,
+                file = item.file,
+                detailPageType = item.detailPageType
+            )
 
-        // Set the updated favoritesList in the ViewModel
-
-        sharedViewModel.addToFavorites(favoriteItem)
-        Toast.makeText(
-            requireContext(),
-            "Đã thêm thành công vào danh sách yêu thích",
-            Toast.LENGTH_SHORT
-        ).show()
+            // Set the updated favoritesList in the ViewModel
+            sharedViewModel.addToFavorites(favoriteItem)
+            Toast.makeText(
+                requireContext(),
+                "Đã thêm thành công vào danh sách yêu thích",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+    }
+    private fun isItemInFavorites(item: audiobook): Boolean {
+        val favoritesList = sharedViewModel.favoritesLiveData.value
+        return favoritesList?.any {
+            it.name == item.name && it.author == item.author
+        } == true
     }
 }

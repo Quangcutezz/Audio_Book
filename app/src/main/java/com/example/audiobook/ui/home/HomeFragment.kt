@@ -32,9 +32,6 @@ class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-
     private lateinit var recyclerView: RecyclerView
     private lateinit var recyclerView2: RecyclerView
     private lateinit var recyclerView3: RecyclerView

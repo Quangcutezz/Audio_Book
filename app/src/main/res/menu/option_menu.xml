@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- res/menu/your_menu_resource_file.xml -->
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_item_1"
+        android:title="@string/favorite"/>
+    <!-- Add more menu items as needed -->
+    <item
+        android:id="@+id/menu_item_2"
+        android:title="@string/delFavor"
+        />
+</menu>

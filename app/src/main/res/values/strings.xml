@@ -8,11 +8,14 @@
     <string name="title_home">Home Page</string>
     <string name="title_search">Search</string>
     <string name="title_music">Music</string>
+    <string name="favorite">Thêm vào danh sách yêu thích</string>
     <string name="typeBut1">Tình Yêu</string>
     <string name="typeBut2">Kinh Doanh</string>
     <string name="typeBut3">Chiến Tranh</string>
     <string name="typeBut4">Cuộc Sống</string>
     <string name="More">Thể loại khác </string>
+    <string name="tvFavor">Danh sách yêu thích</string>
+    <string name="delFavor">Xoá khỏi danh sách yêu thích</string>
     <string name="title_profile">Profile</string>
     <string name="all">Tất cả</string>
     <string name="finding">Tìm kiếm AudioBook, thể loại,</string>

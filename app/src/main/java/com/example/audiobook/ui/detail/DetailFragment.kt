@@ -2,12 +2,15 @@ package com.example.audiobook.ui.detail
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import audiobook
@@ -15,6 +18,7 @@ import com.example.audiobook.DetailAdapter
 import com.example.audiobook.R
 import com.example.audiobook.databinding.FragmentDetailBinding
 import com.example.audiobook.play_book
+import com.example.audiobook.ui.music.MusicFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -22,10 +26,13 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.squareup.picasso.Picasso
 
-class DetailFragment : Fragment(), DetailAdapter.OnItemClickListener {
+class DetailFragment : Fragment(), DetailAdapter.OnItemClickListener,DetailAdapter.OnFavoriteItemClickListener,DetailAdapter.OnFavoriteItemRemoveListener{
 
     private lateinit var binding: FragmentDetailBinding
     private lateinit var detailListView1: RecyclerView
+    private val sharedViewModel: ViewModel by activityViewModels()
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (requireActivity() as AppCompatActivity).findViewById<BottomNavigationView>(R.id.nav_view)
@@ -79,6 +86,8 @@ class DetailFragment : Fragment(), DetailAdapter.OnItemClickListener {
             }
             // ...
         }
+        // Thêm sự kiện cho menu item xoá
+
         val image = audiobook?.image
         val intro = audiobook?.name
         // Set the background of bg_topDetail using Picasso
@@ -107,7 +116,8 @@ class DetailFragment : Fragment(), DetailAdapter.OnItemClickListener {
 
         recyclerView.adapter = adapter
         adapter.setOnItemClickListener(this)
-
+        adapter.setOnFavoriteItemClickListener(this)
+        adapter.setOnFavoriteItemRemoveListener(this)
         val databaseReference = FirebaseDatabase.getInstance().reference.child(databasePath)
         databaseReference.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -138,5 +148,32 @@ class DetailFragment : Fragment(), DetailAdapter.OnItemClickListener {
         intent.putExtra("AUTHOR", audiobook.author)
         intent.putExtra("FILE", audiobook.file)
         startActivity(intent)
+    }
+    override fun onFavoriteItemRemove(item: audiobook) {
+        Toast.makeText(
+            requireContext(),
+            "You cannot remove favorite items from this page. Please go back to the Music page",
+            Toast.LENGTH_SHORT
+        ).show()
+    }
+    override fun onFavoriteItemClick(item: audiobook) {
+        val favoriteItem = audiobook(
+            name = item.name,
+            image = item.image,
+            type = item.type,
+            author = item.author,
+            file = item.file,
+            detailPageType = item.detailPageType
+        )
+        Log.d("FavoriteItem", "Name: ${favoriteItem.name}, Image: ${favoriteItem.image}, Type: ${favoriteItem.type}, Author: ${favoriteItem.author}, File: ${favoriteItem.file}, DetailPageType: ${favoriteItem.detailPageType}")
+
+        // Set the updated favoritesList in the ViewModel
+
+        sharedViewModel.addToFavorites(favoriteItem)
+        Toast.makeText(
+            requireContext(),
+            "Đã thêm thành công vào danh sách yêu thích",
+            Toast.LENGTH_SHORT
+        ).show()
     }
 }

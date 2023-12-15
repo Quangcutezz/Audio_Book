@@ -1,5 +1,6 @@
 package com.example.audiobook
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -17,10 +18,12 @@ import com.google.firebase.database.ValueEventListener
 class DetailType : AppCompatActivity(), GenreAdapter.OnItemClickListener {
     private lateinit var rvType: RecyclerView
     private lateinit var rvMore: RecyclerView
-    private lateinit var adapter:GenreAdapter
+    private lateinit var adapter: GenreAdapter
     private lateinit var buttonBack: Button
     private lateinit var tvType: TextView
 
+    //@SuppressLint("SuspiciousIndentation")
+    @SuppressLint("SuspiciousIndentation")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_type)

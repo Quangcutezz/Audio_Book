@@ -87,5 +87,6 @@ dependencies {
     implementation("com.google.android.exoplayer:exoplayer:2.15.1")
     implementation ("com.google.android.exoplayer:exoplayer-core:2.15.1")
     implementation ("com.google.android.exoplayer:exoplayer-ui:2.15.1")
+    implementation ("com.makeramen:roundedimageview:2.3.0")
 
 }

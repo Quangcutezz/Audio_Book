@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import audiobook
+import com.example.audiobook.DetailAdapter
 import com.example.audiobook.DetailType
 import com.example.audiobook.GenreAdapter
 import com.example.audiobook.R

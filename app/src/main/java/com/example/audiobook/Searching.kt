@@ -9,16 +9,18 @@ import android.widget.Button
 import androidx.appcompat.widget.SearchView
 import android.widget.TextView
 import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import audiobook
 import com.example.audiobook.ui.detail.DetailFragment
+import com.example.audiobook.ui.detail.ViewModel
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
-class Searching : AppCompatActivity(), SearchAdapter.OnItemClickListener {
+class Searching : AppCompatActivity(), SearchAdapter.OnItemClickListener{
     private lateinit var buttonBack: Button
     private lateinit var searchRecyclerView: RecyclerView
     private lateinit var searchView: SearchView
@@ -28,7 +30,6 @@ class Searching : AppCompatActivity(), SearchAdapter.OnItemClickListener {
     private lateinit var tv1: TextView
     private lateinit var tv2: TextView
     private lateinit var tv3: TextView
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_searching)
@@ -112,4 +113,5 @@ class Searching : AppCompatActivity(), SearchAdapter.OnItemClickListener {
         intent.putExtra("FILE", audiobook.file)
         startActivity(intent)
     }
+
 }

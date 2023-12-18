@@ -28,6 +28,8 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.makeramen.roundedimageview.RoundedImageView
+import com.squareup.picasso.Picasso
 
 class ProfileFragment : Fragment(),DetailAdapter.OnWaitItemClickListener,DetailAdapter.OnItemClickListener,DetailAdapter.OnFavoriteItemClickListener,DetailAdapter.OnFavoriteItemRemoveListener {
     private var _binding: FragmentProfileBinding? = null
@@ -38,6 +40,7 @@ class ProfileFragment : Fragment(),DetailAdapter.OnWaitItemClickListener,DetailA
     private lateinit var userId: String
     private lateinit var playListRecyclerView: RecyclerView
     private val sharedViewModel: ViewModel by activityViewModels()
+    private lateinit var imageProfile: RoundedImageView
     private val binding get() = _binding!!
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,6 +50,7 @@ class ProfileFragment : Fragment(),DetailAdapter.OnWaitItemClickListener,DetailA
         val root: View = binding.root
         editButton = binding.editBtn
         name = binding.name
+        imageProfile = binding.imageProfile
         playListRecyclerView = binding.audioProfileList
         editButton.setOnClickListener{
             val intent = Intent(requireContext(), DetailProfile::class.java)
@@ -63,7 +67,9 @@ class ProfileFragment : Fragment(),DetailAdapter.OnWaitItemClickListener,DetailA
                     if (profile != null) {
                         // Cập nhật dữ liệu vào EditText
                         name.setText(profile.name)
-
+                        if (profile.image.isNotEmpty()) {
+                            updateProfileImage(profile.image)
+                        }
                     }
                 }
             }
@@ -101,6 +107,11 @@ class ProfileFragment : Fragment(),DetailAdapter.OnWaitItemClickListener,DetailA
             }
         })
     }
+    fun updateProfileImage(imageUrl: String) {
+        // Hiển thị ảnh mới trong Picasso
+        Picasso.get().load(imageUrl).into(imageProfile)
+    }
+
     private fun updateAdapterData(newData: List<audiobook>) {
         adapter.setData(newData)
     }

@@ -3,7 +3,9 @@ package com.example.audiobook
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
+import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import audiobook
@@ -18,6 +20,7 @@ class SearchAdapter(private var genres: List<audiobook>) : RecyclerView.Adapter<
         val imageViewSearch : ImageView = itemView.findViewById(R.id.imageViewSearch)
         val textViewTypeName : TextView = itemView.findViewById(R.id.nameSearch)
         val textViewGenreAuthor: TextView = itemView.findViewById(R.id.nameSearchAuthor)
+
         init {
             // Thêm sự kiện onClick cho itemView
             itemView.setOnClickListener {
@@ -43,6 +46,7 @@ class SearchAdapter(private var genres: List<audiobook>) : RecyclerView.Adapter<
     override fun getItemCount(): Int {
         return genres.size
     }
+
 
     fun setData(newGenres: List<audiobook>) {
         genres = newGenres

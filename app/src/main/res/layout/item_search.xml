@@ -45,12 +45,4 @@
             />
     </LinearLayout>
 
-    <Button
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="15dp"
-        android:background="@drawable/menu_icon"
-        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
-
 </LinearLayout>

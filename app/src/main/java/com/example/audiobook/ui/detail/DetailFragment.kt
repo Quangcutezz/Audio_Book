@@ -26,7 +26,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.squareup.picasso.Picasso
 
-class DetailFragment : Fragment(), DetailAdapter.OnItemClickListener,DetailAdapter.OnFavoriteItemClickListener,DetailAdapter.OnFavoriteItemRemoveListener{
+class DetailFragment : Fragment(), DetailAdapter.OnItemClickListener,DetailAdapter.OnFavoriteItemClickListener,DetailAdapter.OnFavoriteItemRemoveListener,DetailAdapter.OnWaitItemClickListener,DetailAdapter.OnWaitItemRemoveListener{
 
     private lateinit var binding: FragmentDetailBinding
     private lateinit var detailListView1: RecyclerView
@@ -118,6 +118,8 @@ class DetailFragment : Fragment(), DetailAdapter.OnItemClickListener,DetailAdapt
         adapter.setOnItemClickListener(this)
         adapter.setOnFavoriteItemClickListener(this)
         adapter.setOnFavoriteItemRemoveListener(this)
+        adapter.setOnWaitItemClickListener(this)
+        adapter.setOnWaitItemRemoveListener(this)
         val databaseReference = FirebaseDatabase.getInstance().reference.child(databasePath)
         databaseReference.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -148,6 +150,41 @@ class DetailFragment : Fragment(), DetailAdapter.OnItemClickListener,DetailAdapt
         intent.putExtra("AUTHOR", audiobook.author)
         intent.putExtra("FILE", audiobook.file)
         startActivity(intent)
+    }
+
+    override fun onWaitItemClick(item: audiobook) {
+        if (isItemInWait(item)) {
+            Toast.makeText(
+                requireContext(),
+                "Bài này đã được thêm vào danh sách phát rồi",
+                Toast.LENGTH_SHORT
+            ).show()
+        } else {
+            val waitItem = audiobook(
+                name = item.name,
+                image = item.image,
+                type = item.type,
+                author = item.author,
+                file = item.file,
+                detailPageType = item.detailPageType
+            )
+
+            // Set the updated favoritesList in the ViewModel
+            sharedViewModel.addToWait(waitItem)
+            Toast.makeText(
+                requireContext(),
+                "Đã thêm thành công vào danh sách phát",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+    }
+
+    override fun onWaitItemRemove(item: audiobook) {
+        Toast.makeText(
+            requireContext(),
+            "You cannot remove playlist items from this page. Please go to the Profile page",
+            Toast.LENGTH_SHORT
+        ).show()
     }
     override fun onFavoriteItemRemove(item: audiobook) {
         Toast.makeText(
@@ -185,6 +222,12 @@ class DetailFragment : Fragment(), DetailAdapter.OnItemClickListener,DetailAdapt
     private fun isItemInFavorites(item: audiobook): Boolean {
         val favoritesList = sharedViewModel.favoritesLiveData.value
         return favoritesList?.any {
+            it.name == item.name && it.author == item.author
+        } == true
+    }
+    private fun isItemInWait(item: audiobook): Boolean {
+        val waitList = sharedViewModel.waitData.value
+        return waitList?.any {
             it.name == item.name && it.author == item.author
         } == true
     }

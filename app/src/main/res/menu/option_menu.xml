@@ -9,4 +9,12 @@
         android:id="@+id/menu_item_2"
         android:title="@string/delFavor"
         />
+    <item
+        android:id="@+id/menu_item_3"
+        android:title="@string/waitList"
+        />
+    <item
+        android:id="@+id/menu_item_4"
+        android:title="@string/delWaitList"
+        />
 </menu>

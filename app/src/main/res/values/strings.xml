@@ -16,6 +16,8 @@
     <string name="profileList">Danh Sách Phát</string>
     <string name="More">Thể loại khác </string>
     <string name="Save">Lưu</string>
+    <string name="waitList">Thêm vào danh sách phát</string>
+    <string name="delWaitList">Xoá Khỏi danh sách phát</string>
     <string name="ten">Tên</string>
     <string name="tuoi">Tuổi</string>
     <string name="soDT">Số điện thoại</string>

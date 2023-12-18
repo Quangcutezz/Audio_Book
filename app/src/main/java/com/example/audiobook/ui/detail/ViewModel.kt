@@ -12,6 +12,8 @@ class ViewModel:ViewModel() {
     private val _removeFavoriteEvent = MutableLiveData<audiobook>()
     val removeFavoriteEvent: LiveData<audiobook> get() = _removeFavoriteEvent
 
+    private val _waitData = MutableLiveData<List<audiobook>>()
+    val waitData : LiveData<List<audiobook>> get() = _waitData
 
     fun addToFavorites(item: audiobook) {
         val currentList = _favoritesLiveData.value ?: emptyList()
@@ -22,5 +24,15 @@ class ViewModel:ViewModel() {
         val currentList = _favoritesLiveData.value ?: emptyList()
         val updatedList = currentList.toMutableList().apply { remove(item) }
         _favoritesLiveData.value = updatedList
+    }
+    fun addToWait(item: audiobook){
+        val currentList = _waitData.value ?: emptyList()
+        val updatedList = currentList.toMutableList().apply { add(item) }
+        _waitData.value = updatedList
+    }
+    fun removeWait(item: audiobook) {
+        val currentList = _waitData.value ?: emptyList()
+        val updatedList = currentList.toMutableList().apply { remove(item) }
+        _waitData.value = updatedList
     }
 }

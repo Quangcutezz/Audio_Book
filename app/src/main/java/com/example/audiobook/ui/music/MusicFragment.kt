@@ -20,7 +20,7 @@ import com.example.audiobook.databinding.FragmentMusicBinding
 import com.example.audiobook.play_book
 import com.example.audiobook.ui.detail.ViewModel
 
-class MusicFragment : Fragment(),DetailAdapter.OnItemClickListener,DetailAdapter.OnFavoriteItemClickListener{
+class MusicFragment : Fragment(),DetailAdapter.OnItemClickListener,DetailAdapter.OnFavoriteItemClickListener,DetailAdapter.OnWaitItemRemoveListener,DetailAdapter.OnWaitItemClickListener{
 
     private lateinit var binding: FragmentMusicBinding
     private lateinit var tvFavor: TextView
@@ -58,6 +58,8 @@ class MusicFragment : Fragment(),DetailAdapter.OnItemClickListener,DetailAdapter
         recyclerView.setHasFixedSize(true)
         adapter.setOnItemClickListener(this)
         adapter.setOnFavoriteItemClickListener(this)
+        adapter.setOnWaitItemRemoveListener(this)
+        adapter.setOnWaitItemClickListener(this)
         // Set item click listener to remove the item from the list
         adapter.setOnFavoriteItemRemoveListener(object : DetailAdapter.OnFavoriteItemRemoveListener {
             override fun onFavoriteItemRemove(item: audiobook) {
@@ -73,6 +75,47 @@ class MusicFragment : Fragment(),DetailAdapter.OnItemClickListener,DetailAdapter
         intent.putExtra("AUTHOR", audiobook.author)
         intent.putExtra("FILE", audiobook.file)
         startActivity(intent)
+    }
+
+    override fun onWaitItemRemove(item: audiobook) {
+        Toast.makeText(
+            requireContext(),
+            "You cannot remove favorite items from this page. Please go to the Profile page",
+            Toast.LENGTH_SHORT
+        ).show()
+    }
+
+    override fun onWaitItemClick(item: audiobook) {
+        if (isItemInWait(item)) {
+            Toast.makeText(
+                requireContext(),
+                "Bài này đã được thêm vào danh sách phát rồi",
+                Toast.LENGTH_SHORT
+            ).show()
+        } else {
+            val waitItem = audiobook(
+                name = item.name,
+                image = item.image,
+                type = item.type,
+                author = item.author,
+                file = item.file,
+                detailPageType = item.detailPageType
+            )
+
+            // Set the updated favoritesList in the ViewModel
+            sharedViewModel.addToWait(waitItem)
+            Toast.makeText(
+                requireContext(),
+                "Đã thêm thành công vào danh sách phát",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+    }
+    private fun isItemInWait(item: audiobook): Boolean {
+        val waitList = sharedViewModel.waitData.value
+        return waitList?.any {
+            it.name == item.name && it.author == item.author
+        } == true
     }
     override fun onFavoriteItemClick(item: audiobook) {
         Toast.makeText(

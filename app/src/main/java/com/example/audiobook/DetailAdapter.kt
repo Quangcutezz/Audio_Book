@@ -16,6 +16,14 @@ class DetailAdapter(private var genres: List<audiobook>) : RecyclerView.Adapter<
     private var onItemClickListener: OnItemClickListener? = null
     private var onFavoriteItemClickListener: OnFavoriteItemClickListener? = null
     private var onFavoriteItemRemoveListener: OnFavoriteItemRemoveListener? = null
+    private var onWaitItemClickListener: OnWaitItemClickListener? = null
+    private var onWaitItemRemoveListener: OnWaitItemRemoveListener? = null
+    interface OnWaitItemRemoveListener{
+        fun onWaitItemRemove(item: audiobook)
+    }
+    interface OnWaitItemClickListener{
+        fun onWaitItemClick(item: audiobook)
+    }
 
     interface OnItemClickListener {
         fun onItemClick(audiobook: audiobook)
@@ -76,6 +84,12 @@ class DetailAdapter(private var genres: List<audiobook>) : RecyclerView.Adapter<
     fun setOnFavoriteItemRemoveListener(listener: OnFavoriteItemRemoveListener) {
         this.onFavoriteItemRemoveListener = listener
     }
+    fun setOnWaitItemClickListener(listener: OnWaitItemClickListener){
+        this.onWaitItemClickListener = listener
+    }
+    fun setOnWaitItemRemoveListener(listener: OnWaitItemRemoveListener){
+        this.onWaitItemRemoveListener = listener
+    }
     fun setData(newGenres: List<audiobook>) {
         genres = newGenres
         notifyDataSetChanged()
@@ -92,6 +106,14 @@ class DetailAdapter(private var genres: List<audiobook>) : RecyclerView.Adapter<
                 }
                 R.id.menu_item_2 ->{
                     onFavoriteItemRemoveListener?.onFavoriteItemRemove(item)
+                    true
+                }
+                R.id.menu_item_3 ->{
+                    onWaitItemClickListener?.onWaitItemClick(item)
+                    true
+                }
+                R.id.menu_item_4 ->{
+                    onWaitItemRemoveListener?.onWaitItemRemove(item)
                     true
                 }
                 else -> false

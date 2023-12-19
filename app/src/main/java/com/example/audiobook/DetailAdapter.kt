@@ -18,6 +18,10 @@ class DetailAdapter(private var genres: List<audiobook>) : RecyclerView.Adapter<
     private var onFavoriteItemRemoveListener: OnFavoriteItemRemoveListener? = null
     private var onWaitItemClickListener: OnWaitItemClickListener? = null
     private var onWaitItemRemoveListener: OnWaitItemRemoveListener? = null
+    private var onDownloadItemClickListener: OnDownloadItemClickListener? = null
+    interface OnDownloadItemClickListener{
+        fun onDownloadItemClick(item: audiobook)
+    }
     interface OnWaitItemRemoveListener{
         fun onWaitItemRemove(item: audiobook)
     }
@@ -75,6 +79,9 @@ class DetailAdapter(private var genres: List<audiobook>) : RecyclerView.Adapter<
 //            onItemClickListener?.onItemClick(genre)
 //        }
     }
+    fun setOnDownloadItemClickListnener(listener: OnDownloadItemClickListener){
+        this.onDownloadItemClickListener = listener
+    }
     fun setOnItemClickListener(listener: OnItemClickListener) {
         this.onItemClickListener = listener
     }
@@ -114,6 +121,10 @@ class DetailAdapter(private var genres: List<audiobook>) : RecyclerView.Adapter<
                 }
                 R.id.menu_item_4 ->{
                     onWaitItemRemoveListener?.onWaitItemRemove(item)
+                    true
+                }
+                R.id.menu_item_5 ->{
+                    onDownloadItemClickListener?.onDownloadItemClick(item)
                     true
                 }
                 else -> false

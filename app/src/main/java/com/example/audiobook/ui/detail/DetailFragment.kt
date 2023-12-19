@@ -1,7 +1,10 @@
 package com.example.audiobook.ui.detail
 
+import android.app.DownloadManager
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -26,7 +29,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.squareup.picasso.Picasso
 
-class DetailFragment : Fragment(), DetailAdapter.OnItemClickListener,DetailAdapter.OnFavoriteItemClickListener,DetailAdapter.OnFavoriteItemRemoveListener,DetailAdapter.OnWaitItemClickListener,DetailAdapter.OnWaitItemRemoveListener{
+class DetailFragment : Fragment(), DetailAdapter.OnItemClickListener,DetailAdapter.OnFavoriteItemClickListener,DetailAdapter.OnFavoriteItemRemoveListener,DetailAdapter.OnWaitItemClickListener,DetailAdapter.OnWaitItemRemoveListener,DetailAdapter.OnDownloadItemClickListener{
 
     private lateinit var binding: FragmentDetailBinding
     private lateinit var detailListView1: RecyclerView
@@ -120,6 +123,7 @@ class DetailFragment : Fragment(), DetailAdapter.OnItemClickListener,DetailAdapt
         adapter.setOnFavoriteItemRemoveListener(this)
         adapter.setOnWaitItemClickListener(this)
         adapter.setOnWaitItemRemoveListener(this)
+        adapter.setOnDownloadItemClickListnener(this)
         val databaseReference = FirebaseDatabase.getInstance().reference.child(databasePath)
         databaseReference.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -193,6 +197,30 @@ class DetailFragment : Fragment(), DetailAdapter.OnItemClickListener,DetailAdapt
             Toast.LENGTH_SHORT
         ).show()
     }
+
+    override fun onDownloadItemClick(item: audiobook) {
+        downloadFile(item.file, "${item.name}_${item.author}.mp3")
+    }
+    private fun downloadFile(url: String, fileName: String) {
+        val request = DownloadManager.Request(Uri.parse(url))
+            .setTitle("Downloading")
+            .setDescription("Downloading $fileName")
+            .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+
+        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, fileName)
+
+        // Đặt đường dẫn đến thư mục downloads của ứng dụng
+
+        // Cho phép download qua mạng di động và roaming
+        request.setAllowedOverMetered(true)
+        request.setAllowedOverRoaming(true)
+
+        val downloadManager = requireActivity().getSystemService(AppCompatActivity.DOWNLOAD_SERVICE) as DownloadManager
+        downloadManager.enqueue(request)
+
+        Toast.makeText(requireContext(), "Đang tải xuống $fileName", Toast.LENGTH_SHORT).show()
+    }
+
     override fun onFavoriteItemClick(item: audiobook) {
         if (isItemInFavorites(item)) {
             Toast.makeText(

@@ -17,4 +17,8 @@
         android:id="@+id/menu_item_4"
         android:title="@string/delWaitList"
         />
+    <item
+        android:id="@+id/menu_item_5"
+        android:title="@string/Download"
+        />
 </menu>

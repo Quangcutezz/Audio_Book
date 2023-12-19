@@ -1,13 +1,17 @@
 package com.example.audiobook.ui.profile
 
+import android.app.DownloadManager
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -31,7 +35,7 @@ import com.google.firebase.database.ValueEventListener
 import com.makeramen.roundedimageview.RoundedImageView
 import com.squareup.picasso.Picasso
 
-class ProfileFragment : Fragment(),DetailAdapter.OnWaitItemClickListener,DetailAdapter.OnItemClickListener,DetailAdapter.OnFavoriteItemClickListener,DetailAdapter.OnFavoriteItemRemoveListener {
+class ProfileFragment : Fragment(),DetailAdapter.OnWaitItemClickListener,DetailAdapter.OnItemClickListener,DetailAdapter.OnFavoriteItemClickListener,DetailAdapter.OnFavoriteItemRemoveListener,DetailAdapter.OnDownloadItemClickListener {
     private var _binding: FragmentProfileBinding? = null
     private lateinit var editButton :Button
     private lateinit var name: TextView
@@ -97,6 +101,7 @@ class ProfileFragment : Fragment(),DetailAdapter.OnWaitItemClickListener,DetailA
         recyclerView.adapter = adapter
         recyclerView.setHasFixedSize(true)
         adapter.setOnItemClickListener(this)
+        adapter.setOnDownloadItemClickListnener(this)
         adapter.setOnFavoriteItemClickListener(this)
         // Set item click listener to remove the item from the list
         adapter.setOnFavoriteItemRemoveListener(this)
@@ -136,6 +141,28 @@ class ProfileFragment : Fragment(),DetailAdapter.OnWaitItemClickListener,DetailA
             "You cannot remove favorite items from this page. Please go back to the Music page",
             Toast.LENGTH_SHORT
         ).show()
+    }
+    override fun onDownloadItemClick(item: audiobook) {
+        downloadFile(item.file, "${item.name}_${item.author}.mp3")
+    }
+    private fun downloadFile(url: String, fileName: String) {
+        val request = DownloadManager.Request(Uri.parse(url))
+            .setTitle("Downloading")
+            .setDescription("Downloading $fileName")
+            .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+
+        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, fileName)
+
+        // Đặt đường dẫn đến thư mục downloads của ứng dụng
+
+        // Cho phép download qua mạng di động và roaming
+        request.setAllowedOverMetered(true)
+        request.setAllowedOverRoaming(true)
+
+        val downloadManager = requireActivity().getSystemService(AppCompatActivity.DOWNLOAD_SERVICE) as DownloadManager
+        downloadManager.enqueue(request)
+
+        Toast.makeText(requireContext(), "Đang tải xuống $fileName", Toast.LENGTH_SHORT).show()
     }
     override fun onFavoriteItemClick(item: audiobook) {
         if (isItemInFavorites(item)) {

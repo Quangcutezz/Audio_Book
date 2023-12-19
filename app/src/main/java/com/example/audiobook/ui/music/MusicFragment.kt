@@ -24,7 +24,7 @@ import com.example.audiobook.databinding.FragmentMusicBinding
 import com.example.audiobook.play_book
 import com.example.audiobook.ui.detail.ViewModel
 
-class MusicFragment : Fragment(),DetailAdapter.OnItemClickListener,DetailAdapter.OnFavoriteItemClickListener,DetailAdapter.OnWaitItemRemoveListener,DetailAdapter.OnWaitItemClickListener,DetailAdapter.OnDownloadItemClickListener{
+class MusicFragment : Fragment(),DetailAdapter.OnItemClickListener,DetailAdapter.OnFavoriteItemClickListener,DetailAdapter.OnWaitItemRemoveListener,DetailAdapter.OnWaitItemClickListener,DetailAdapter.OnDownloadItemClickListener,DetailAdapter.OnShareItemClickListener{
 
     private lateinit var binding: FragmentMusicBinding
     private lateinit var tvFavor: TextView
@@ -65,6 +65,7 @@ class MusicFragment : Fragment(),DetailAdapter.OnItemClickListener,DetailAdapter
         adapter.setOnWaitItemRemoveListener(this)
         adapter.setOnWaitItemClickListener(this)
         adapter.setOnDownloadItemClickListnener(this)
+        adapter.setOnShareItemClickListener(this)
         // Set item click listener to remove the item from the list
         adapter.setOnFavoriteItemRemoveListener(object : DetailAdapter.OnFavoriteItemRemoveListener {
             override fun onFavoriteItemRemove(item: audiobook) {
@@ -131,6 +132,22 @@ class MusicFragment : Fragment(),DetailAdapter.OnItemClickListener,DetailAdapter
     }
     override fun onDownloadItemClick(item: audiobook) {
         downloadFile(item.file, "${item.name}_${item.author}.mp3")
+    }
+    override fun onShareItemClick(item: audiobook) {
+        shareItem(item)
+    }
+    private fun shareItem(item: audiobook) {
+        val shareIntent = Intent(Intent.ACTION_SEND)
+        shareIntent.type = "text/plain"
+
+        // Tạo nội dung chia sẻ với đường link chia sẻ của Google Drive
+        val shareMessage = "${item.name}\nNghe tại: ${item.file}"
+
+        // Đặt nội dung chia sẻ
+        shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage)
+
+        // Mở màn hình chia sẻ
+        startActivity(Intent.createChooser(shareIntent, "Chia sẻ thông qua"))
     }
     private fun downloadFile(url: String, fileName: String) {
         val request = DownloadManager.Request(Uri.parse(url))

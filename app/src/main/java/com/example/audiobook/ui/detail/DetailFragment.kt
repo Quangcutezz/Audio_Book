@@ -29,7 +29,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.squareup.picasso.Picasso
 
-class DetailFragment : Fragment(), DetailAdapter.OnItemClickListener,DetailAdapter.OnFavoriteItemClickListener,DetailAdapter.OnFavoriteItemRemoveListener,DetailAdapter.OnWaitItemClickListener,DetailAdapter.OnWaitItemRemoveListener,DetailAdapter.OnDownloadItemClickListener{
+class DetailFragment : Fragment(), DetailAdapter.OnItemClickListener,DetailAdapter.OnFavoriteItemClickListener,DetailAdapter.OnFavoriteItemRemoveListener,DetailAdapter.OnWaitItemClickListener,DetailAdapter.OnWaitItemRemoveListener,DetailAdapter.OnDownloadItemClickListener,DetailAdapter.OnShareItemClickListener{
 
     private lateinit var binding: FragmentDetailBinding
     private lateinit var detailListView1: RecyclerView
@@ -124,6 +124,7 @@ class DetailFragment : Fragment(), DetailAdapter.OnItemClickListener,DetailAdapt
         adapter.setOnWaitItemClickListener(this)
         adapter.setOnWaitItemRemoveListener(this)
         adapter.setOnDownloadItemClickListnener(this)
+        adapter.setOnShareItemClickListener(this)
         val databaseReference = FirebaseDatabase.getInstance().reference.child(databasePath)
         databaseReference.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -249,6 +250,27 @@ class DetailFragment : Fragment(), DetailAdapter.OnItemClickListener,DetailAdapt
             ).show()
         }
     }
+
+    override fun onShareItemClick(item: audiobook) {
+        shareItem(item)
+    }
+    private fun shareItem(item: audiobook) {
+        val shareIntent = Intent(Intent.ACTION_SEND)
+        shareIntent.type = "text/plain"
+
+        // Tạo nội dung chia sẻ với đường link chia sẻ của Google Drive
+        val shareMessage = "${item.name}\nNghe tại: ${item.file}"
+
+        // Đặt nội dung chia sẻ
+        shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage)
+
+        // Mở màn hình chia sẻ
+        startActivity(Intent.createChooser(shareIntent, "Chia sẻ thông qua"))
+    }
+
+
+
+
     private fun isItemInFavorites(item: audiobook): Boolean {
         val favoritesList = sharedViewModel.favoritesLiveData.value
         return favoritesList?.any {

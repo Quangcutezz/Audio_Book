@@ -6,67 +6,93 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
     tools:context=".ui.profile.ProfileFragment">
-    <RelativeLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:background="@drawable/bg_profile"
-        >
-        <com.makeramen.roundedimageview.RoundedImageView
-            android:id="@+id/imageProfile"
-            android:layout_width="130dp"
-            android:layout_height="130dp"
-            android:layout_marginTop="50dp"
-            android:layout_marginStart="20dp"
-            android:src="@drawable/bmo_pic3"
-            app:riv_corner_radius="90dp"
-            />
-        <TextView
-            android:id="@+id/name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            android:layout_marginStart="170dp"
-            android:layout_marginTop="90dp"
-            android:text="Quanggg"
-            android:textSize="30dp"
-            />
-    </RelativeLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:orientation="vertical"
-        android:layout_marginTop="200dp"
-        android:layout_height="wrap_content">
-
-        <Button
-            android:id="@+id/editBtn"
-            android:layout_width="100dp"
-            android:layout_height="40dp"
-            android:background="@drawable/button_border"
-            android:text="@string/editProfile"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:textSize="15dp"
-            tools:ignore="TouchTargetSizeCheck,TextSizeCheck" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textColor="@color/teal_200"
-            android:textSize="30dp"
-            android:text="@string/profileList"
-            android:layout_marginTop="10dp"
-            />
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/audioProfileList"
+        android:layout_height="match_parent">
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:orientation="vertical"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            />
-    </LinearLayout>
+            android:layout_height="match_parent">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:background="@drawable/bg_profile"
+                >
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:id="@+id/imageProfile"
+                    android:layout_width="130dp"
+                    android:layout_height="130dp"
+                    android:layout_marginTop="50dp"
+                    android:layout_marginStart="20dp"
+                    android:src="@drawable/bmo_pic3"
+                    app:riv_corner_radius="90dp"
+                    />
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:layout_marginStart="170dp"
+                    android:layout_marginTop="90dp"
+                    android:text="User name"
+                    android:textSize="30dp"
+                    />
+            </RelativeLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:orientation="vertical"
+                android:layout_marginTop="0dp"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:id="@+id/editBtn"
+                    android:layout_width="100dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/button_border"
+                    android:text="@string/editProfile"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="15dp"
+                    tools:ignore="TouchTargetSizeCheck,TextSizeCheck" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textColor="@color/teal_200"
+                    android:textSize="30dp"
+                    android:text="@string/profileList"
+                    android:layout_marginTop="10dp"
+                    />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/audioProfileList"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textColor="@color/teal_200"
+                    android:textSize="30dp"
+                    android:text="@string/History"
+                    android:layout_marginTop="10dp"/>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/historyList"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
 
 </FrameLayout>

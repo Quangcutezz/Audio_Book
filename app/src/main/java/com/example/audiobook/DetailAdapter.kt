@@ -28,7 +28,6 @@ class DetailAdapter(private var genres: List<audiobook>) : RecyclerView.Adapter<
     interface OnWaitItemClickListener{
         fun onWaitItemClick(item: audiobook)
     }
-
     interface OnItemClickListener {
         fun onItemClick(audiobook: audiobook)
     }

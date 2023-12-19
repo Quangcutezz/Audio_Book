@@ -45,6 +45,7 @@ class ProfileFragment : Fragment(),DetailAdapter.OnWaitItemClickListener,DetailA
     private lateinit var playListRecyclerView: RecyclerView
     private val sharedViewModel: ViewModel by activityViewModels()
     private lateinit var imageProfile: RoundedImageView
+    private lateinit var historyListRecyclerView: RecyclerView
     private val binding get() = _binding!!
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,6 +57,8 @@ class ProfileFragment : Fragment(),DetailAdapter.OnWaitItemClickListener,DetailA
         name = binding.name
         imageProfile = binding.imageProfile
         playListRecyclerView = binding.audioProfileList
+        historyListRecyclerView = binding.historyList
+
         editButton.setOnClickListener{
             val intent = Intent(requireContext(), DetailProfile::class.java)
             startActivity(intent)
@@ -82,6 +85,8 @@ class ProfileFragment : Fragment(),DetailAdapter.OnWaitItemClickListener,DetailA
                 // Xử lý lỗi
             }
         })
+
+
         return root
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -91,6 +96,10 @@ class ProfileFragment : Fragment(),DetailAdapter.OnWaitItemClickListener,DetailA
         sharedViewModel.waitData.observe(viewLifecycleOwner, Observer { waitList ->
             // Update your RecyclerView with the new data
             setupRecyclerView(playListRecyclerView, waitList)
+        })
+        sharedViewModel.historyData.observe(viewLifecycleOwner, Observer { historyList ->
+            // Update your RecyclerView with the new data
+            setupRecyclerView(historyListRecyclerView, historyList)
         })
     }
     private fun setupRecyclerView(recyclerView: RecyclerView, waitList: List<audiobook>) {
@@ -102,6 +111,7 @@ class ProfileFragment : Fragment(),DetailAdapter.OnWaitItemClickListener,DetailA
         recyclerView.setHasFixedSize(true)
         adapter.setOnItemClickListener(this)
         adapter.setOnDownloadItemClickListnener(this)
+        adapter.setOnWaitItemClickListener(this)
         adapter.setOnFavoriteItemClickListener(this)
         // Set item click listener to remove the item from the list
         adapter.setOnFavoriteItemRemoveListener(this)
@@ -138,7 +148,7 @@ class ProfileFragment : Fragment(),DetailAdapter.OnWaitItemClickListener,DetailA
     override fun onFavoriteItemRemove(item: audiobook) {
         Toast.makeText(
             requireContext(),
-            "You cannot remove favorite items from this page. Please go back to the Music page",
+            "Bạn không thể xoá danh sách yêu thích ở đây, hãy chuyển đến Music Fragment",
             Toast.LENGTH_SHORT
         ).show()
     }

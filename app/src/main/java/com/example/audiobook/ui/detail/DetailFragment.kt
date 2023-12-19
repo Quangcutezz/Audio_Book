@@ -153,6 +153,8 @@ class DetailFragment : Fragment(), DetailAdapter.OnItemClickListener,DetailAdapt
         intent.putExtra("NAME", audiobook.name)
         intent.putExtra("AUTHOR", audiobook.author)
         intent.putExtra("FILE", audiobook.file)
+
+        sharedViewModel.addToHistory(audiobook)
         startActivity(intent)
     }
 
@@ -186,7 +188,7 @@ class DetailFragment : Fragment(), DetailAdapter.OnItemClickListener,DetailAdapt
     override fun onWaitItemRemove(item: audiobook) {
         Toast.makeText(
             requireContext(),
-            "You cannot remove playlist items from this page. Please go to the Profile page",
+            "Bạn không thể xoá item trong danh sách phát ở đây, hãy chuyển đến Profile Fragment",
             Toast.LENGTH_SHORT
         ).show()
     }

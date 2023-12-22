@@ -144,6 +144,8 @@ class ProfileFragment : Fragment(),DetailAdapter.OnWaitItemClickListener,DetailA
         intent.putExtra("NAME", audiobook.name)
         intent.putExtra("AUTHOR", audiobook.author)
         intent.putExtra("FILE", audiobook.file)
+
+        sharedViewModel.addToHistory(audiobook)
         startActivity(intent)
     }
     override fun onFavoriteItemRemove(item: audiobook) {

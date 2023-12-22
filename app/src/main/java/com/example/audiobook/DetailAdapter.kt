@@ -107,6 +107,9 @@ class DetailAdapter(private var genres: List<audiobook>) : RecyclerView.Adapter<
         genres = newGenres
         notifyDataSetChanged()
     }
+    fun getAllItems(): List<audiobook> {
+        return genres
+    }
     private fun showPopupMenu(view: View, item: audiobook) {
         val popupMenu = PopupMenu(view.context, view)
         popupMenu.menuInflater.inflate(R.menu.option_menu, popupMenu.menu)

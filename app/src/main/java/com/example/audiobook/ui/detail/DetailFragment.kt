@@ -33,6 +33,8 @@ class DetailFragment : Fragment(), DetailAdapter.OnItemClickListener,DetailAdapt
 
     private lateinit var binding: FragmentDetailBinding
     private lateinit var detailListView1: RecyclerView
+    private lateinit var btnPlayList: Button
+    private lateinit var audioList: List<audiobook>
     private val sharedViewModel: ViewModel by activityViewModels()
 
 
@@ -68,9 +70,12 @@ class DetailFragment : Fragment(), DetailAdapter.OnItemClickListener,DetailAdapt
         binding = FragmentDetailBinding.inflate(inflater, container, false)
         val root: View = binding.root
         detailListView1 = binding.detailList1
-
+//        btnPlayList.setOnClickListener {
+//            playAudioList()
+//        }
         val arguments = arguments
 
+        //audioList =
         val audiobook = arguments?.getSerializable(ARG_AUDIOBOOK) as audiobook?
         val detailPageType = audiobook?.detailPageType
         if (detailPageType != null) {
@@ -87,9 +92,11 @@ class DetailFragment : Fragment(), DetailAdapter.OnItemClickListener,DetailAdapt
                 // Hiển thị dữ liệu từ database DetailPage2
                 setupRecyclerView(detailListView1, "DetailAudio3")
             }
-            // ...
+
         }
-        // Thêm sự kiện cho menu item xoá
+
+        // Lưu danh sách audio từ detailListView
+
 
         val image = audiobook?.image
         val intro = audiobook?.name
@@ -107,6 +114,16 @@ class DetailFragment : Fragment(), DetailAdapter.OnItemClickListener,DetailAdapt
 
         return root
     }
+//    private fun playAudioList() {
+//        // Tạo Intent để chuyển đến play_book
+//        val intent = Intent(requireContext(), play_book::class.java)
+//
+//        // Gửi danh sách audio cho play_book
+//        intent.putExtra("AUDIO_LIST", ArrayList(audioList))
+//
+//        // Chuyển đến play_book
+//        startActivity(intent)
+//    }
 
     private fun setupRecyclerView(recyclerView: RecyclerView, databasePath: String) {
         recyclerView.layoutManager =
@@ -139,6 +156,8 @@ class DetailFragment : Fragment(), DetailAdapter.OnItemClickListener,DetailAdapt
                     val genre = audiobook(name, image, type, author, file,detailPageType)
                     genres.add(genre)
                 }
+//                audioList = genres
+
                 adapter.setData(genres)
             }
 
@@ -267,9 +286,6 @@ class DetailFragment : Fragment(), DetailAdapter.OnItemClickListener,DetailAdapt
         // Mở màn hình chia sẻ
         startActivity(Intent.createChooser(shareIntent, "Chia sẻ thông qua"))
     }
-
-
-
 
     private fun isItemInFavorites(item: audiobook): Boolean {
         val favoritesList = sharedViewModel.favoritesLiveData.value

@@ -80,6 +80,8 @@ class MusicFragment : Fragment(),DetailAdapter.OnItemClickListener,DetailAdapter
         intent.putExtra("NAME", audiobook.name)
         intent.putExtra("AUTHOR", audiobook.author)
         intent.putExtra("FILE", audiobook.file)
+
+        sharedViewModel.addToHistory(audiobook)
         startActivity(intent)
     }
 

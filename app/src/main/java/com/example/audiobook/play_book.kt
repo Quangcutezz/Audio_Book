@@ -6,9 +6,12 @@ import android.util.Log
 import android.widget.Button
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
+import audiobook
 import com.google.android.exoplayer2.DefaultLoadControl
 import com.google.android.exoplayer2.SimpleExoPlayer
 import com.google.android.exoplayer2.extractor.DefaultExtractorsFactory
+import com.google.android.exoplayer2.source.ConcatenatingMediaSource
+import com.google.android.exoplayer2.source.MediaSource
 import com.google.android.exoplayer2.source.ProgressiveMediaSource
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector
 import com.google.android.exoplayer2.ui.PlayerView
@@ -22,20 +25,20 @@ class play_book : AppCompatActivity() {
     private var playWhenReady = true
     private var currentWindow = 0
     private var playbackPosition: Long = 0
-
+//    private lateinit var audioList: List<audiobook>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_play_book)
 
         val button7: Button = findViewById(R.id.button7)
         playerView = findViewById(R.id.playerView)
-
         val intent = intent
         val image = intent.getStringExtra("IMAGE")
         val name = intent.getStringExtra("NAME")
         val file = intent.getStringExtra("FILE")
-        Log.d("PlayBookActivity", "Image: $image, Name: $name, File: $file")
-        Log.d("PlayBookActivity", "File path: $file")
+        // Nhận audioList từ Intent
+//        audioList = intent.getSerializableExtra("AUDIO_LIST") as? ArrayList<audiobook> ?: emptyList()
+
 
         initializePlayer(Uri.parse(file))
         Picasso.get().load(image).into(findViewById<ImageView>(R.id.imageView))
@@ -87,4 +90,5 @@ class play_book : AppCompatActivity() {
             Log.e("PlayBookActivity", "Error releasing player: ${e.message}")
         }
     }
+
 }

@@ -111,6 +111,7 @@ class Searching : AppCompatActivity(), SearchAdapter.OnItemClickListener{
         intent.putExtra("NAME", audiobook.name)
         intent.putExtra("AUTHOR", audiobook.author)
         intent.putExtra("FILE", audiobook.file)
+
         startActivity(intent)
     }
 

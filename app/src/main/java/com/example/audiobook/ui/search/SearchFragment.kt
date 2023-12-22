@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import audiobook
@@ -18,6 +19,7 @@ import com.example.audiobook.R
 import com.example.audiobook.Searching
 import com.example.audiobook.databinding.FragmentSearchBinding
 import com.example.audiobook.ui.detail.DetailFragment
+import com.example.audiobook.ui.detail.ViewModel
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -105,6 +107,7 @@ class SearchFragment : Fragment() {
         })
         adapter.setOnItemClickListener(object : GenreAdapter.OnItemClickListener {
             override fun onItemClick(audiobook: audiobook) {
+
 
                 // Lấy ID hoặc loại dữ liệu liên quan từ audiobook
                 val detailPageType = audiobook.detailPageType
